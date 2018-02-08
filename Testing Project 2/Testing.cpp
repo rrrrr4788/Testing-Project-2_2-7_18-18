@@ -33,8 +33,9 @@ int main() {
 	return 0;
 }
 
-void MagicSquare(int **matrix, int n) {
-	int dms = n * n;
+void MagicSquare(int **matrix, int n) {//This magic square only makes sure that the sum of each row and each collumn is the same
+
+	int dms = n * n;                   //But the sum of the two diagonals is not guarranteed. 
 	int i = n / 2;
 	int	j = n / 2;     // Matrix construction starts in the middle
 
@@ -70,6 +71,7 @@ void MagicSquare(int **matrix, int n) {
 
 void TbtMagicSquare(int **matrix, int n){
 	MagicSquare(matrix, n);
+	CheckPerfection(matrix, n);
 	//rotate it 8 times
 }
 void NormalMagicSquare(int **matrix, int n) {
@@ -77,6 +79,36 @@ void NormalMagicSquare(int **matrix, int n) {
 	//rotate it 10 times
 }
 void CheckPerfection(int **matrix, int n) {
+	int sum = 0;
+	int tempsum = 0;
+	for (int a = 0; a < n; a++) {
+		sum += matrix[a][0];
+	}
+	for (int b = 0; b < n; b++) {
+		tempsum += matrix[0][b];
+	}
+	if (tempsum != sum) {
+		cout << "Fuck off my work is perfect." << endl;
+		return;
+	}
+	for (int b = 0; b < n; b++) {
+		tempsum += matrix[b][b];
+	}
+	if (tempsum != sum) {
+		cout << "Fuck off my work is perfect." << endl;
+		return;
+	}
+	for (int b = 0; b < n; b++) {
+		tempsum += matrix[n - b][n - b];
+	}
+	if (tempsum != sum) {
+		cout << "Fuck off my work is perfect." << endl;
+		return;
+	}
+
+	cout << "Told ya my work is definitely perfect." << endl;
+	//FIXME: this function only checks the first column and the two diagonals.
+
 
 }
 /*
