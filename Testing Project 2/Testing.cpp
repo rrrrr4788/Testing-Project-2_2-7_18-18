@@ -34,45 +34,40 @@ int main() {
 }
 
 void MagicSquare(int **matrix, int n) {
-	int dmt = n * n;
-	int i = 0;
-	int	j = n/2;     // start position
+	int dms = n * n;
+	int i = n / 2;
+	int	j = n / 2;     // Matrix construction starts in the middle
 
-	for (int k = 1; k <= dmt; ++k)
-	{
+	for (int k = 1; k <= dms; ++k) {
 		matrix[i][j] = k;
 
 		i++;
-		j--;
+		j--;//The numbers are filled in in the derection of bottomleft
 
-		if (k%n == 0)
-		{
-			j += 2;
-			--i;
+		if (k % n == 0) { //Immediate adjustments
+			i -= 2;
+			++j;
+			if (i<0) {
+				i += n;
+			}
 		}
-		else
-		{
+		else {
 			if (i == n)
 				i -= n;
-			else if (j < 0)
+			if (j < 0)
 				j += n;
 		}
-		for (int a = 0; a < n; a++) {
-			for (int b = 0; b < n; b++) {
-				cout << matrix[a][b] << " ";
-			}
-			cout << endl;
-		}
-		cout << endl;
 
 	}
-	/*for (int a = 0; a < n; a++) {
+	for (int a = 0; a < n; a++) {
 		for (int b = 0; b < n; b++) {
 			cout << matrix[a][b] << " ";
 		}
 		cout << endl;
-	}*/
+
+	}
 }
+
 void TbtMagicSquare(int **matrix, int n){
 	MagicSquare(matrix, n);
 	//rotate it 8 times
