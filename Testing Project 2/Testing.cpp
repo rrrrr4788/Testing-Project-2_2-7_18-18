@@ -45,13 +45,6 @@ void MagicSquare(int **matrix, int n) {//This magic square only makes sure that 
 		i++;
 		j--;//The numbers are filled in in the derection of bottomleft
 
-		/*if (k % n == 0) { //Immediate adjustments
-			i -= 2;
-			++j;
-			if (i<0) {
-				i += n;
-			}
-		}*/
 		if (k % n == 0) { //Immediate adjustments
 			i -= 1;
 			j+=2;
@@ -83,6 +76,7 @@ void TbtMagicSquare(int **matrix, int n){
 }
 void NormalMagicSquare(int **matrix, int n) {
 	MagicSquare(matrix, n);
+	CheckPerfection(matrix, n);
 	//rotate it 10 times
 }
 void CheckPerfection(int **matrix, int n) {
@@ -91,19 +85,31 @@ void CheckPerfection(int **matrix, int n) {
 	for (int a = 0; a < n; a++) {
 		sum += matrix[a][0];
 	}
-	for (int b = 0; b < n; b++) {
-		tempsum += matrix[0][b];
+	for (int a = 0; a < n; a++) {
+		for (int b = 0; b < n; b++) {
+			tempsum += matrix[b][a];
+		}
+		if (tempsum != sum) {
+			cout << "Fuck off my work is perfect.1" << endl;
+			return;
+		}
+		tempsum = 0;
 	}
-	if (tempsum != sum) {
-		cout << "Fuck off my work is perfect.1" << endl;
-		return;
+	for (int a = 0; a < n; a++) {
+		for (int b = 0; b < n; b++) {
+			tempsum += matrix[a][b];
+		}
+		if (tempsum != sum) {
+			cout << "Fuck off my work is perfect.2" << endl;
+			return;
+		}
+		tempsum = 0;
 	}
-	tempsum = 0;
 	for (int b = 0; b < n; b++) {
 		tempsum += matrix[b][b];
 	}
 	if (tempsum != sum) {
-		cout << "Fuck off my work is perfect.2" << endl;
+		cout << "Fuck off my work is perfect.3" << endl;
 		return;
 	}
 	tempsum = 0;
@@ -111,7 +117,7 @@ void CheckPerfection(int **matrix, int n) {
 		tempsum += matrix[n - b - 1][n - b - 1];
 	}
 	if (tempsum != sum) {
-		cout << "Fuck off my work is perfect.3" << endl;
+		cout << "Fuck off my work is perfect.4" << endl;
 		return;
 	}
 
