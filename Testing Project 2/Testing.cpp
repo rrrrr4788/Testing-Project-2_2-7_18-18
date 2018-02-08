@@ -36,8 +36,8 @@ int main() {
 void MagicSquare(int **matrix, int n) {//This magic square only makes sure that the sum of each row and each collumn is the same
 
 	int dms = n * n;                   //But the sum of the two diagonals is not guarranteed. 
-	int i = n / 2;
-	int	j = n / 2;     // Matrix construction starts in the middle
+	int i = n/2;
+	int	j = 0;     // Matrix construction starts in the middle
 
 	for (int k = 1; k <= dms; ++k) {
 		matrix[i][j] = k;
@@ -45,9 +45,16 @@ void MagicSquare(int **matrix, int n) {//This magic square only makes sure that 
 		i++;
 		j--;//The numbers are filled in in the derection of bottomleft
 
-		if (k % n == 0) { //Immediate adjustments
+		/*if (k % n == 0) { //Immediate adjustments
 			i -= 2;
 			++j;
+			if (i<0) {
+				i += n;
+			}
+		}*/
+		if (k % n == 0) { //Immediate adjustments
+			i -= 1;
+			j+=2;
 			if (i<0) {
 				i += n;
 			}
@@ -88,21 +95,23 @@ void CheckPerfection(int **matrix, int n) {
 		tempsum += matrix[0][b];
 	}
 	if (tempsum != sum) {
-		cout << "Fuck off my work is perfect." << endl;
+		cout << "Fuck off my work is perfect.1" << endl;
 		return;
 	}
+	tempsum = 0;
 	for (int b = 0; b < n; b++) {
 		tempsum += matrix[b][b];
 	}
 	if (tempsum != sum) {
-		cout << "Fuck off my work is perfect." << endl;
+		cout << "Fuck off my work is perfect.2" << endl;
 		return;
 	}
+	tempsum = 0;
 	for (int b = 0; b < n; b++) {
-		tempsum += matrix[n - b][n - b];
+		tempsum += matrix[n - b - 1][n - b - 1];
 	}
 	if (tempsum != sum) {
-		cout << "Fuck off my work is perfect." << endl;
+		cout << "Fuck off my work is perfect.3" << endl;
 		return;
 	}
 
